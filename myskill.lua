@@ -16,8 +16,8 @@
 Total_Skills_Number = 117
 Total_Classes_Number = 9
 
--- 设置特定技能到20级
-function make_legendary(skillname)
+-- 设置特定技能到特定级
+function make_legendary(skillname,skillrate)
 local skillnamenoun,skillnum
 unit=dfhack.gui.getSelectedUnit()
 
@@ -36,8 +36,8 @@ else
 if skillnamenoun ~= nil then
 	utils = require 'utils'
 	skillnum = df.job_skill[skillname]
-	utils.insert_or_update(unit.status.current_soul.skills, { new = true, id = skillnum, rating = 20 }, 'id')
-	print (unit.name.first_name.." is now a Legendary "..skillnamenoun)
+	utils.insert_or_update(unit.status.current_soul.skills, { new = true, id = skillnum, rating = skillrate}, 'id')
+	print (unit.name.first_name.."'s "..skillnamenoun .." skill is setted to " ..skillrate .." now.")
 else
 	print ("Empty skill name noun, bailing out!")
 	return
@@ -130,6 +130,7 @@ end
 ----
 local opt = {...}
 local skillname
+local skillrate
 
 if opt then
 	if opt[1]=="list" then
@@ -157,9 +158,14 @@ if opt then
 		return
 		end
 	skillname = opt[1]
+	if opt[2] then
+		skillrate = opt[2]
+	else
+		skillrate = 20
+	end
 else
 	print ("No skillname supplied.  Pass argument 'list' to see a list, 'classes' to show skill classes, or use 'all' if you want it all!")
 	return
 	end
 
-make_legendary(skillname)
+make_legendary(skillname,skillrate)
