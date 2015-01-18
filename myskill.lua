@@ -149,8 +149,17 @@ if opt then
 		OutputSkillList()
 		return
 		end
-	if opt[1]=="Normal" or opt[1]=="Medical" or opt[1]=="Personal" or opt[1]=="Social" or opt[1]=="Cultural" or opt[1]=="MilitaryWeapon" or opt[1]=="MilitaryAttack" or opt[1]=="MilitaryDefense" or opt[1]=="MilitaryMisc" then
+	if opt[1]=="Normal" or opt[1]=="Medical" or opt[1]=="Personal" or opt[1]=="Social" or opt[1]=="Cultural" or opt[1]=="MilitaryWeapon" or opt[1]=="MilitaryUnarmed" or opt[1]=="MilitaryAttack" or opt[1]=="MilitaryDefense" or opt[1]=="MilitaryMisc" then
 		LegendaryByClass(opt[1])
+		return
+		end
+	-- 提升所有军事技能相关到20级
+	if opt[1] == "Spartan" then
+		LegendaryByClass("MilitaryWeapon")
+		LegendaryByClass("MilitaryUnarmed")
+		LegendaryByClass("MilitaryAttack")
+		LegendaryByClass("MilitaryDefense")
+		LegendaryByClass("MilitaryMisc")
 		return
 		end
 	if opt[1]=="SetAllTo" then
